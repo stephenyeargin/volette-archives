@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+
+require 'fileutils'
+require 'net/http'
+require 'json'
+
+url = 'https://archive.org/advancedsearch.php?q=collection%3Athepacer+creator%3A%22The+Volette%22&fl[]=date&fl[]=identifier&fl[]=title&fl[]=volume&sort[]=date+asc&sort[]=&sort[]=&rows=1000&page=1&output=json&save=yes'
+uri = URI(url)
+response = Net::HTTP.get(uri)
+searchresults = JSON.parse(response)
+
+# Loop through the results
+for doc in searchresults['response']['docs']
+  workingDirectory = File.join(File.dirname(File.dirname(__FILE__)), "volume-#{doc['volume']}")
+
+  # Create the directories
+  FileUtils.mkdir_p(workingDirectory)
+
+  # Write out issue file
+  File.open(File.join(workingDirectory, "#{doc['identifier']}.html"), 'w') do |file|
+    file.write("---\n")
+    file.write("layout: default\n")
+    file.write("---\n")
+    file.write("\n")
+    file.write("<h1>#{doc['title']}</h1>\n")
+    file.write("<iframe src=\"https://archive.org/embed/#{doc['identifier']}\" width=\"920\" height=\"800\" frameborder=\"0\" webkitallowfullscreen=\"true\" mozallowfullscreen=\"true\" allowfullscreen></iframe>\n")
+  end
+
+end
