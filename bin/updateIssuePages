@@ -2,6 +2,7 @@
 
 require 'fileutils'
 require 'net/http'
+require 'date'
 require 'json'
 
 url = 'https://archive.org/advancedsearch.php?q=collection%3Athepacer+creator%3A%22The+Volette%22&fl[]=date&fl[]=identifier&fl[]=title&fl[]=volume&sort[]=date+asc&sort[]=&sort[]=&rows=1000&page=1&output=json&save=yes'
@@ -9,21 +10,51 @@ uri = URI(url)
 response = Net::HTTP.get(uri)
 searchresults = JSON.parse(response)
 
-# Loop through the results
-for doc in searchresults['response']['docs']
-  workingDirectory = File.join(File.dirname(File.dirname(__FILE__)), "volume-#{doc['volume']}")
+issueIndex = {}
 
-  # Create the directories
+# Loop through the results to build index
+for doc in searchresults['response']['docs']
+  # Create index of volumes and issues
+  issueIndex[doc['volume']] = [] if issueIndex[doc['volume']].nil?
+  issueIndex[doc['volume']] << doc
+end
+
+# Loop through index and create files
+for volume in issueIndex.keys
+  workingDirectory = File.join(File.dirname(File.dirname(__FILE__)), "volume-#{volume}")
   FileUtils.mkdir_p(workingDirectory)
 
-  # Write out issue file
-  File.open(File.join(workingDirectory, "#{doc['identifier']}.html"), 'w') do |file|
+  # Write out issue inded
+  File.open(File.join(workingDirectory, "index.md"), 'w') do |file|
     file.write("---\n")
+    file.write("title: Volume #{volume}\n")
     file.write("layout: default\n")
     file.write("---\n")
     file.write("\n")
-    file.write("<h1>#{doc['title']}</h1>\n")
-    file.write("<iframe src=\"https://archive.org/embed/#{doc['identifier']}\" width=\"920\" height=\"800\" frameborder=\"0\" webkitallowfullscreen=\"true\" mozallowfullscreen=\"true\" allowfullscreen></iframe>\n")
+    file.write("<h1>Volume #{volume}</h1>\n")
+    file.write("\n")
+    for issue in issueIndex[volume]
+      file.write("- [#{Date.parse(issue['date']).strftime('%B %-e, %Y')}](#{issue['identifier']}.html)\n")
+    end
   end
 
+  for issue in issueIndex[volume]
+    # Write out issue file
+    File.open(File.join(workingDirectory, "#{issue['identifier']}.html"), 'w') do |file|
+      file.write("---\n")
+      file.write("title: #{issue['title']}\n")
+      file.write("layout: default\n")
+      file.write("---\n")
+      file.write("\n")
+      file.write("<h1>#{issue['title']}</h1>\n")
+      file.write("<div class=\"embed-responsive embed-responsive-16by9\">")
+      file.write("  <iframe class=\"embed-responsive-item\" src=\"https://archive.org/embed/#{issue['identifier']}\" webkitallowfullscreen=\"true\" mozallowfullscreen=\"true\" allowfullscreen></iframe>\n")
+      file.write("</div>")
+      file.write("<a href=\"/volume-#{volume}\">Back to Volume #{volume}</a>")
+    end
+  end
 end
+
+
+
+# puts issueIndex.inspect
