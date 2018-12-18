@@ -13,3 +13,10 @@ layout: home
 {{ post.date | date: '%B %e, %Y' }}
 {{ post.excerpt }}
 {% endfor %}
+
+<ul>
+{% assign volumes = (site.pages | sort: 'volume') | reverse %}
+{% for volume in volumes %}
+<li><a href="{{ post.url }}">{{ post.title }}</a></li>
+{% endfor %}
+</ul>

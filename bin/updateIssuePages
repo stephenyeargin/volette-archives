@@ -28,13 +28,18 @@ for volume in issueIndex.keys
   File.open(File.join(workingDirectory, "index.md"), 'w') do |file|
     file.write("---\n")
     file.write("title: Volume #{volume}\n")
+    file.write("volume: #{volume}\n")
     file.write("layout: default\n")
     file.write("---\n")
     file.write("\n")
     file.write("<h1>Volume #{volume}</h1>\n")
     file.write("\n")
     for issue in issueIndex[volume]
-      file.write("- [#{Date.parse(issue['date']).strftime('%B %-e, %Y')}](#{issue['identifier']}.html)\n")
+      file.write("![#{issue['identifier']}](https://archive.org/services/img/#{issue['identifier']})\n")
+      file.write("\n")
+      file.write("[#{Date.parse(issue['date']).strftime('%B %-e, %Y')}](#{issue['identifier']}.html)\n")
+      file.write("\n")
+      file.write("\n")
     end
   end
 
