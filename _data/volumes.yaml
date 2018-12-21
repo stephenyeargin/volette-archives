@@ -1,0 +1,216 @@
+- volume: 1
+  cover: TheVolette19290107
+  start: 1929-01-07T00:00:00Z
+  end: 1929-05-21T00:00:00Z
+  count: 10
+
+- volume: 2
+  cover: TheVolette19291110
+  start: 1929-11-10T00:00:00Z
+  end: 1930-04-07T00:00:00Z
+  count: 9
+
+- volume: 3
+  cover: TheVolette19301020
+  start: 1930-10-20T00:00:00Z
+  end: 1931-05-18T00:00:00Z
+  count: 11
+
+- volume: 4
+  cover: TheVolette19311102
+  start: 1931-11-02T00:00:00Z
+  end: 1932-05-23T00:00:00Z
+  count: 13
+
+- volume: 5
+  cover: TheVolette19321024
+  start: 1932-10-24T00:00:00Z
+  end: 1933-05-22T00:00:00Z
+  count: 14
+
+- volume: 6
+  cover: TheVolette19331130
+  start: 1933-11-30T00:00:00Z
+  end: 1933-11-30T00:00:00Z
+  count: 1
+
+- volume: 7
+  cover: TheVolette19340919
+  start: 1934-09-19T00:00:00Z
+  end: 1935-05-20T00:00:00Z
+  count: 16
+
+- volume: 8
+  cover: TheVolette19350923
+  start: 1935-09-23T00:00:00Z
+  end: 1936-05-25T00:00:00Z
+  count: 17
+
+- volume: 9
+  cover: TheVolette19361005
+  start: 1936-10-05T00:00:00Z
+  end: 1937-05-24T00:00:00Z
+  count: 16
+
+- volume: 10
+  cover: TheVolette19370920
+  start: 1937-09-20T00:00:00Z
+  end: 1938-07-09T00:00:00Z
+  count: 18
+
+- volume: 11
+  cover: TheVolette19381003
+  start: 1938-10-03T00:00:00Z
+  end: 1939-05-29T00:00:00Z
+  count: 15
+
+- volume: 12
+  cover: TheVolette19390925
+  start: 1939-09-25T00:00:00Z
+  end: 1940-08-03T00:00:00Z
+  count: 17
+
+- volume: 13
+  cover: TheVolette19400927
+  start: 1940-09-27T00:00:00Z
+  end: 1941-07-28T00:00:00Z
+  count: 16
+
+- volume: 14
+  cover: TheVolette19411003
+  start: 1941-10-03T00:00:00Z
+  end: 1942-07-13T00:00:00Z
+  count: 14
+
+- volume: 15
+  cover: TheVolette19421012
+  start: 1942-10-12T00:00:00Z
+  end: 1943-06-14T00:00:00Z
+  count: 9
+
+- volume: 16
+  cover: TheVolette19431126
+  start: 1943-11-26T00:00:00Z
+  end: 1944-05-29T00:00:00Z
+  count: 4
+
+- volume: 17
+  cover: TheVolette19441113
+  start: 1944-11-13T00:00:00Z
+  end: 1945-05-21T00:00:00Z
+  count: 6
+
+- volume: 18
+  cover: TheVolette19451022
+  start: 1945-10-22T00:00:00Z
+  end: 1946-05-27T00:00:00Z
+  count: 7
+
+- volume: 19
+  cover: TheVolette19460930
+  start: 1946-09-30T00:00:00Z
+  end: 1947-05-17T00:00:00Z
+  count: 13
+
+- volume: 20
+  cover: TheVolette19471021
+  start: 1947-10-21T00:00:00Z
+  end: 1948-05-11T00:00:00Z
+  count: 9
+
+- volume: 21
+  cover: TheVolette19480803
+  start: 1948-08-03T00:00:00Z
+  end: 1949-05-31T00:00:00Z
+  count: 13
+
+- volume: 22
+  cover: TheVolette19491011
+  start: 1949-10-11T00:00:00Z
+  end: 1950-05-23T00:00:00Z
+  count: 10
+
+- volume: 23
+  cover: TheVolette19501010
+  start: 1950-10-10T00:00:00Z
+  end: 1951-05-22T00:00:00Z
+  count: 10
+
+- volume: 24
+  cover: TheVolette19511016
+  start: 1951-10-16T00:00:00Z
+  end: 1952-05-20T00:00:00Z
+  count: 10
+
+- volume: 25
+  cover: TheVolette19520909
+  start: 1952-09-09T00:00:00Z
+  end: 1953-05-19T00:00:00Z
+  count: 12
+
+- volume: 26
+  cover: TheVolette19531013
+  start: 1953-10-13T00:00:00Z
+  end: 1954-05-25T00:00:00Z
+  count: 10
+
+- volume: 27
+  cover: TheVolette19541012
+  start: 1954-10-12T00:00:00Z
+  end: 1955-05-24T00:00:00Z
+  count: 11
+
+- volume: 28
+  cover: TheVolette19551011
+  start: 1955-10-11T00:00:00Z
+  end: 1956-05-22T00:00:00Z
+  count: 10
+
+- volume: 29
+  cover: TheVolette19561009
+  start: 1956-10-09T00:00:00Z
+  end: 1957-08-13T00:00:00Z
+  count: 11
+
+- volume: 30
+  cover: TheVolette19571008
+  start: 1957-10-08T00:00:00Z
+  end: 1958-05-20T00:00:00Z
+  count: 10
+
+- volume: 31
+  cover: TheVolette19581010
+  start: 1958-10-10T00:00:00Z
+  end: 1959-05-22T00:00:00Z
+  count: 10
+
+- volume: 32
+  cover: TheVolette19590929
+  start: 1959-09-29T00:00:00Z
+  end: 1960-05-13T00:00:00Z
+  count: 14
+
+- volume: 33
+  cover: TheVolette19601011
+  start: 1960-10-11T00:00:00Z
+  end: 1961-05-19T00:00:00Z
+  count: 13
+
+- volume: 34
+  cover: TheVolette19611010
+  start: 1961-10-10T00:00:00Z
+  end: 1962-05-18T00:00:00Z
+  count: 13
+
+- volume: 35
+  cover: TheVolette19621002
+  start: 1962-10-02T00:00:00Z
+  end: 1963-05-17T00:00:00Z
+  count: 13
+
+- volume: 36
+  cover: TheVolette19631008
+  start: 1963-10-08T00:00:00Z
+  end: 1964-05-19T00:00:00Z
+  count: 21
+

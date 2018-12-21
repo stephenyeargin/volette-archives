@@ -1,0 +1,18 @@
+---
+title: The Volette
+layout: home
+---
+
+<div class="row">
+{% for row in site.data.volumes %}
+  <div class="col-lg-4">
+    <div class="card mb-2">
+      <div class="card-body">
+        <a href="/volume-{{ row.volume }}"><img class="float-left w-25 mr-4" src="https://archive.org/services/img/{{ row.cover }}" alt="{{ row.cover }}"></a>
+        <h5 class="card-title"><a href="/volume-{{ row.volume }}">Volume {{ row.volume }} ({{ row.start | date: '%Y' }}-{{ row.end | date: '%Y' }})</a></h5>
+        <p class="card-text">{{ row.count }} issue{% if row.count > 1 %}s{% endif %}.</p>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+</div>

@@ -5,7 +5,7 @@ require 'net/http'
 require 'date'
 require 'json'
 
-url = 'https://archive.org/advancedsearch.php?q=collection%3Athepacer+creator%3A%22The+Volette%22&fl[]=date&fl[]=identifier&fl[]=title&fl[]=volume&sort[]=date+asc&sort[]=&sort[]=&rows=1000&page=1&output=json&save=yes'
+url = 'https://archive.org/advancedsearch.php?q=collection%3Athepacer+creator%3A%22The+Volette%22&fl[]=date&fl[]=identifier&fl[]=title&fl[]=volume&fl[]=issue&sort[]=date+asc&sort[]=&sort[]=&rows=1000&page=1&output=json&save=yes'
 uri = URI(url)
 response = Net::HTTP.get(uri)
 searchresults = JSON.parse(response)
@@ -19,28 +19,51 @@ for doc in searchresults['response']['docs']
   issueIndex[doc['volume']] << doc
 end
 
+# Create site data file
+File.open(File.join('_data', 'volumes.yaml'), 'w') do |file|
+  for volume in issueIndex.keys
+    file.write("- volume: #{volume}\n")
+    file.write("  cover: #{issueIndex[volume].first['identifier']}\n")
+    file.write("  start: #{issueIndex[volume].first['date']}\n")
+    file.write("  end: #{issueIndex[volume].last['date']}\n")
+    file.write("  count: #{issueIndex[volume].length}\n")
+    file.write("\n")
+  end
+end
+
 # Loop through index and create files
 for volume in issueIndex.keys
   workingDirectory = File.join(File.dirname(File.dirname(__FILE__)), "volume-#{volume}")
   FileUtils.mkdir_p(workingDirectory)
 
   # Write out issue inded
-  File.open(File.join(workingDirectory, "index.md"), 'w') do |file|
+  File.open(File.join(workingDirectory, "index.html"), 'w') do |file|
     file.write("---\n")
     file.write("title: Volume #{volume}\n")
     file.write("volume: #{volume}\n")
     file.write("layout: default\n")
     file.write("---\n")
     file.write("\n")
+
+    file.write("<nav aria-label=\"breadcrumb\">")
+    file.write("  <ol class=\"breadcrumb\">")
+    file.write("    <li class=\"breadcrumb-item\"><a href=\"/\">The Volette</a></li>")
+    file.write("    <li class=\"breadcrumb-item active\" aria-current=\"page\">Volume #{volume}</li>")
+    file.write("  </ol>")
+    file.write("</nav>")
     file.write("<h1>Volume #{volume}</h1>\n")
-    file.write("\n")
+    file.write("<div class=\"row\">\n")
     for issue in issueIndex[volume]
-      file.write("![#{issue['identifier']}](https://archive.org/services/img/#{issue['identifier']})\n")
-      file.write("\n")
-      file.write("[#{Date.parse(issue['date']).strftime('%B %-e, %Y')}](#{issue['identifier']}.html)\n")
-      file.write("\n")
-      file.write("\n")
+      file.write("<div class=\"col-lg-3\">\n")
+      file.write("  <div class=\"card mb-3\">\n")
+      file.write("    <a href=\"#{issue['identifier']}.html\"><img class=\"card-img-top\" src=\"https://archive.org/services/img/#{issue['identifier']}\" />\n")
+      file.write("    <div class=\"card-body\">\n")
+      file.write("      <a href=\"#{issue['identifier']}.html\">#{Date.parse(issue['date']).strftime('%B %-e, %Y')}</a>\n")
+      file.write("    </div>\n")
+      file.write("  </div>\n")
+      file.write("</div>\n")
     end
+    file.write("</div>\n")
   end
 
   for issue in issueIndex[volume]
@@ -51,11 +74,22 @@ for volume in issueIndex.keys
       file.write("layout: default\n")
       file.write("---\n")
       file.write("\n")
-      file.write("<h1>#{issue['title']}</h1>\n")
-      file.write("<div class=\"embed-responsive embed-responsive-16by9\">")
+      file.write("<nav aria-label=\"breadcrumb\">")
+      file.write("  <ol class=\"breadcrumb\">")
+      file.write("    <li class=\"breadcrumb-item\"><a href=\"/\">The Volette</a></li>")
+      file.write("    <li class=\"breadcrumb-item\"><a href=\"/volume-#{issue['volume']}\">Volume #{issue['volume']}</a></li>")
+      file.write("    <li class=\"breadcrumb-item active\" aria-current=\"page\">#{Date.parse(issue['date']).strftime('%B %-e, %Y')}</li>")
+      file.write("  </ol>")
+      file.write("</nav>")
+      file.write("<h1>#{Date.parse(issue['date']).strftime('%B %-e, %Y')}</h1>\n")
+      file.write("<ul class=\"list-inline\">\n")
+      file.write("  <li class=\"list-inline-item\"><strong>Volume:</strong> #{issue['volume']}</li>\n")
+      file.write("  <li class=\"list-inline-item\"><strong>Issue:</strong> #{issue['issue']}</li>\n")
+      file.write("</ul>\n")
+      file.write("<div class=\"embed-responsive embed-responsive-16by9 mt-4 mb-4\">")
       file.write("  <iframe class=\"embed-responsive-item\" src=\"https://archive.org/embed/#{issue['identifier']}\" webkitallowfullscreen=\"true\" mozallowfullscreen=\"true\" allowfullscreen></iframe>\n")
       file.write("</div>")
-      file.write("<a href=\"/volume-#{volume}\">Back to Volume #{volume}</a>")
+      file.write("<p><a href=\"/volume-#{volume}\">Back to Volume #{volume}</a></p>")
     end
   end
 end
