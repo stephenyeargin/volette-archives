@@ -44,9 +44,9 @@ for volume in issueIndex.keys
     for issue in issueIndex[volume]
       file.write("<div class=\"col-lg-3\">\n")
       file.write("  <div class=\"card mb-3\">\n")
-      file.write("    <a href=\"#{issue['identifier']}.html\"><img class=\"card-img-top\" src=\"https://archive.org/services/img/#{issue['identifier']}\" />\n")
       file.write("    <div class=\"card-body\">\n")
-      file.write("      <a href=\"#{issue['identifier']}.html\">#{Date.parse(issue['date']).strftime('%B %-e, %Y')}</a>\n")
+      file.write("      <a href=\"#{issue['identifier']}.html\"><img class=\"float-left w-25 mr-4\" src=\"https://archive.org/services/img/#{issue['identifier']}\" alt=\"#{issue['identifier']}\"></a>\n")
+      file.write("      <h5 class=\"mt-2\"><a href=\"#{issue['identifier']}.html\">#{Date.parse(issue['date']).strftime('%B %-e, %Y')}</a></h5>\n")
       file.write("    </div>\n")
       file.write("  </div>\n")
       file.write("</div>\n")
@@ -70,6 +70,7 @@ for volume in issueIndex.keys
       file.write("  </ol>")
       file.write("</nav>")
       file.write("<h1>#{Date.parse(issue['date']).strftime('%B %-e, %Y')}</h1>\n")
+      file.write("<div class=\"float-right\"><a href=\"https://archive.org/details/#{issue['identifier']}\" class=\"btn btn-primary btn-sm\" target=\"_blank\"><i class=\"fas fa-newspaper fa-fw\"></i> Read Issue at Archive.org</a></div>\n")
       file.write("<ul class=\"list-inline\">\n")
       file.write("  <li class=\"list-inline-item\"><strong>Volume:</strong> #{issue['volume']}</li>\n")
       file.write("  <li class=\"list-inline-item\"><strong>Issue:</strong> #{issue['issue']}</li>\n")
@@ -77,11 +78,7 @@ for volume in issueIndex.keys
       file.write("<div class=\"embed-responsive embed-responsive-16by9 mt-4 mb-4\">")
       file.write("  <iframe class=\"embed-responsive-item\" src=\"https://archive.org/embed/#{issue['identifier']}\" webkitallowfullscreen=\"true\" mozallowfullscreen=\"true\" allowfullscreen></iframe>\n")
       file.write("</div>")
-      file.write("<p><a href=\"/volume-#{volume}\">Back to Volume #{volume}</a></p>")
+      file.write("<p><a href=\"/volume-#{volume}\" class=\"btn btn-secondary\"><i class=\"fas fa-chevron-left fa-fw\"></i> Back to Volume #{volume}</a></p>")
     end
   end
 end
-
-
-
-# puts issueIndex.inspect
