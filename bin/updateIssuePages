@@ -19,18 +19,6 @@ for doc in searchresults['response']['docs']
   issueIndex[doc['volume']] << doc
 end
 
-# Create site data file
-File.open(File.join('_data', 'volumes.yaml'), 'w') do |file|
-  for volume in issueIndex.keys
-    file.write("- volume: #{volume}\n")
-    file.write("  cover: #{issueIndex[volume].first['identifier']}\n")
-    file.write("  start: #{issueIndex[volume].first['date']}\n")
-    file.write("  end: #{issueIndex[volume].last['date']}\n")
-    file.write("  count: #{issueIndex[volume].length}\n")
-    file.write("\n")
-  end
-end
-
 # Loop through index and create files
 for volume in issueIndex.keys
   workingDirectory = File.join(File.dirname(File.dirname(__FILE__)), "volume-#{volume}")
