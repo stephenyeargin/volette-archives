@@ -214,3 +214,39 @@
   end: 1964-05-19T00:00:00Z
   count: 21
 
+- volume: 37
+  cover: TheVolette19641001
+  start: 1964-10-01T00:00:00Z
+  end: 1965-05-14T00:00:00Z
+  count: 22
+
+- volume: 38
+  cover: TheVolette19650919
+  start: 1965-09-19T00:00:00Z
+  end: 1966-05-19T00:00:00Z
+  count: 24
+
+- volume: 39
+  cover: TheVolette19660922
+  start: 1966-09-22T00:00:00Z
+  end: 1967-05-18T00:00:00Z
+  count: 26
+
+- volume: 40
+  cover: TheVolette19670918
+  start: 1967-09-18T00:00:00Z
+  end: 1968-07-08T00:00:00Z
+  count: 29
+
+- volume: 41
+  cover: TheVolette19680918
+  start: 1968-09-18T00:00:00Z
+  end: 1969-05-28T00:00:00Z
+  count: 29
+
+- volume: 42
+  cover: TheVolette19690924
+  start: 1969-09-24T00:00:00Z
+  end: 1970-07-29T00:00:00Z
+  count: 37
+
