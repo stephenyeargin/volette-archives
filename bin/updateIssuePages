@@ -5,7 +5,7 @@ require 'net/http'
 require 'date'
 require 'json'
 
-url = 'https://archive.org/advancedsearch.php?q=collection%3Athepacer+creator%3A%22The+Volette%22&fl[]=date&fl[]=identifier&fl[]=title&fl[]=volume&fl[]=issue&sort[]=date+asc&sort[]=&sort[]=&rows=1000&page=1&output=json&save=yes'
+url = 'https://archive.org/advancedsearch.php?q=collection%3Athepacer+creator%3A%22The+Volette%22&fl[]=date&fl[]=identifier&fl[]=title&fl[]=volume&sort[]=date+asc&sort[]=&sort[]=&rows=1000&page=1&output=json&save=yes'
 uri = URI(url)
 response = Net::HTTP.get(uri)
 searchresults = JSON.parse(response)
@@ -27,18 +27,18 @@ for volume in issueIndex.keys
   # Write out issue inded
   File.open(File.join(workingDirectory, "index.html"), 'w') do |file|
     file.write("---\n")
-    file.write("title: Volume #{volume}\n")
+    file.write("title: The Volette - Volume #{volume}\n")
     file.write("volume: #{volume}\n")
     file.write("layout: default\n")
     file.write("---\n")
     file.write("\n")
-
     file.write("<nav aria-label=\"breadcrumb\">")
     file.write("  <ol class=\"breadcrumb\">")
     file.write("    <li class=\"breadcrumb-item\"><a href=\"/\">The Volette</a></li>")
     file.write("    <li class=\"breadcrumb-item active\" aria-current=\"page\">Volume #{volume}</li>")
     file.write("  </ol>")
     file.write("</nav>")
+    file.write("<div class=\"float-right\"><a href=\"https://archive.org/details/thepacer?and[]=volume:#{volume}&sort=-date\" class=\"btn btn-primary\" target=\"_blank\"><i class=\"fas fa-newspaper fa-fw\"></i> Browse Volume at Archive.org</a></div>\n")
     file.write("<h1>Volume #{volume}</h1>\n")
     file.write("<div class=\"row\">\n")
     for issue in issueIndex[volume]
@@ -58,7 +58,7 @@ for volume in issueIndex.keys
     # Write out issue file
     File.open(File.join(workingDirectory, "#{issue['identifier']}.html"), 'w') do |file|
       file.write("---\n")
-      file.write("title: #{issue['title']}\n")
+      file.write("title: The Volette - #{issue['title']}\n")
       file.write("layout: default\n")
       file.write("---\n")
       file.write("\n")
@@ -69,12 +69,8 @@ for volume in issueIndex.keys
       file.write("    <li class=\"breadcrumb-item active\" aria-current=\"page\">#{Date.parse(issue['date']).strftime('%B %-e, %Y')}</li>")
       file.write("  </ol>")
       file.write("</nav>")
+      file.write("<div class=\"float-right ml-4 mt-3 mb-3\"><a href=\"https://archive.org/details/#{issue['identifier']}\" class=\"btn btn-primary\" target=\"_blank\"><i class=\"fas fa-newspaper fa-fw\"></i> Read Issue at Archive.org</a></div>\n")
       file.write("<h1>#{Date.parse(issue['date']).strftime('%B %-e, %Y')}</h1>\n")
-      file.write("<div class=\"float-right\"><a href=\"https://archive.org/details/#{issue['identifier']}\" class=\"btn btn-primary btn-sm\" target=\"_blank\"><i class=\"fas fa-newspaper fa-fw\"></i> Read Issue at Archive.org</a></div>\n")
-      file.write("<ul class=\"list-inline\">\n")
-      file.write("  <li class=\"list-inline-item\"><strong>Volume:</strong> #{issue['volume']}</li>\n")
-      file.write("  <li class=\"list-inline-item\"><strong>Issue:</strong> #{issue['issue']}</li>\n")
-      file.write("</ul>\n")
       file.write("<div class=\"embed-responsive embed-responsive-16by9 mt-4 mb-4\">")
       file.write("  <iframe class=\"embed-responsive-item\" src=\"https://archive.org/embed/#{issue['identifier']}\" webkitallowfullscreen=\"true\" mozallowfullscreen=\"true\" allowfullscreen></iframe>\n")
       file.write("</div>")
