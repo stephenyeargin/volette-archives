@@ -39,7 +39,7 @@ for volume in issueIndex.keys
     file.write("    <li class=\"breadcrumb-item active\" aria-current=\"page\">Volume #{volume}</li>")
     file.write("  </ol>")
     file.write("</nav>")
-    file.write("<div class=\"float-right\"><a href=\"https://archive.org/details/thepacer?and[]=volume:#{volume}&sort=-date\" class=\"btn btn-primary\" target=\"_blank\"><i class=\"fas fa-newspaper fa-fw\"></i> Browse Volume at Archive.org</a></div>\n")
+    file.write("<div class=\"float-right\"><a href=\"https://archive.org/details/thepacer?and[]=volume:#{volume}&sort=date\" class=\"btn btn-primary\" target=\"_blank\"><i class=\"fas fa-newspaper fa-fw\"></i> Browse Volume at Archive.org</a></div>\n")
     file.write("<h1>Volume #{volume}</h1>\n")
     file.write("<div class=\"row\">\n")
     for issue in issueIndex[volume]
