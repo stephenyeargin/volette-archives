@@ -14,12 +14,12 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 title: The Volette
-email: volette@yearg.in
+email: volette@thepacer.org
 description: >- # this means to ignore newlines until "baseurl:"
   The Volette was the student newspaper at the University of Tennessee at Martin
   from 1928 to 1971. It was the forerunner to today's paper, The Pacer.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://volette.yearg.in" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://volette.thepacer.org" # the base hostname & protocol for your site, e.g. http://example.com
 
 # Build settings
 markdown: kramdown
